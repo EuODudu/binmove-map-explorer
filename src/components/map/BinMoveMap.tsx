@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
 import { useEffect, useMemo, useRef } from "react";
 import type { Map as LeafletMap } from "leaflet";
 import {
@@ -19,14 +19,6 @@ interface BinMoveMapProps {
   selectedTruckId: string | null;
   onSelectPoint: (p: CollectionPoint | null) => void;
   onSelectTruck: (id: string | null) => void;
-}
-
-function MapRefBinder({ mapRef }: { mapRef: React.MutableRefObject<LeafletMap | null> }) {
-  const map = useMap();
-  useEffect(() => {
-    mapRef.current = map;
-  }, [map, mapRef]);
-  return null;
 }
 
 const SP_CENTER: [number, number] = [-23.5648, -46.6485];
@@ -71,6 +63,7 @@ export default function BinMoveMap({
       scrollWheelZoom
       className="h-full w-full rounded-2xl"
       attributionControl
+      ref={mapRef}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
@@ -183,8 +176,6 @@ export default function BinMoveMap({
             </Popup>
           </Marker>
         ))}
-
-      <MapRefBinder mapRef={mapRef} />
     </MapContainer>
   );
 }

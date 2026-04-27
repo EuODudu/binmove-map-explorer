@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
 import { useEffect, useMemo, useRef } from "react";
 import type { Map as LeafletMap } from "leaflet";
 import {

@@ -63,6 +63,7 @@ export default function BinMoveMap({
       scrollWheelZoom
       className="h-full w-full rounded-2xl"
       attributionControl
+      ref={mapRef}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'

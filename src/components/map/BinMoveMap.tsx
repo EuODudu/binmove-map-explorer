@@ -176,8 +176,6 @@ export default function BinMoveMap({
             </Popup>
           </Marker>
         ))}
-
-      <MapRefBinder mapRef={mapRef} />
     </MapContainer>
   );
 }

@@ -3,7 +3,9 @@ import { CATEGORY_META, COLLECTION_POINTS, type WasteCategory } from "@/data/col
 import { TRUCK_ROUTES } from "@/data/truckRoutes";
 import { cn } from "@/lib/utils";
 
-const CATEGORY_ICON: Record<WasteCategory, React.ComponentType<{ className?: string }>> = {
+import type { LucideIcon } from "lucide-react";
+
+const CATEGORY_ICON: Record<WasteCategory, LucideIcon> = {
   reciclavel: Recycle,
   organico: Leaf,
   eletronico: Lightbulb,

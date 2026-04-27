@@ -21,14 +21,6 @@ interface BinMoveMapProps {
   onSelectTruck: (id: string | null) => void;
 }
 
-function MapRefBinder({ mapRef }: { mapRef: React.MutableRefObject<LeafletMap | null> }) {
-  const map = useMap();
-  useEffect(() => {
-    mapRef.current = map;
-  }, [map, mapRef]);
-  return null;
-}
-
 const SP_CENTER: [number, number] = [-23.5648, -46.6485];
 
 export default function BinMoveMap({

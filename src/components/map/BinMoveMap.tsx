@@ -41,23 +41,27 @@ export default function BinMoveMap({
   onSelectTruck,
 }: BinMoveMapProps) {
   const trucks = useAnimatedTrucks(TRUCK_ROUTES);
+  const trucksRef = useRef(trucks);
+  trucksRef.current = trucks;
+  const mapRef = useRef<LeafletMap | null>(null);
 
   const visiblePoints = useMemo(
     () => COLLECTION_POINTS.filter((p) => activeCategories.has(p.category)),
     [activeCategories],
   );
 
-  const flyTarget = useMemo<[number, number] | null>(() => {
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    let target: [number, number] | null = null;
     if (selectedPointId) {
       const p = COLLECTION_POINTS.find((x) => x.id === selectedPointId);
-      return p ? p.position : null;
+      target = p ? p.position : null;
+    } else if (selectedTruckId) {
+      const t = trucksRef.current.find((x) => x.route.id === selectedTruckId);
+      target = t ? t.position : null;
     }
-    if (selectedTruckId) {
-      const t = trucks.find((x) => x.route.id === selectedTruckId);
-      return t ? t.position : null;
-    }
-    return null;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (target) map.flyTo(target, 15, { duration: 0.8 });
   }, [selectedPointId, selectedTruckId]);
 
   return (
@@ -180,7 +184,7 @@ export default function BinMoveMap({
           </Marker>
         ))}
 
-      <FlyTo position={flyTarget} />
+      <MapRefBinder mapRef={mapRef} />
     </MapContainer>
   );
 }

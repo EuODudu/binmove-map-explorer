@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from "react-leaflet";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
+import type { Map as LeafletMap } from "leaflet";
 import {
   COLLECTION_POINTS,
   CATEGORY_META,
@@ -20,11 +21,11 @@ interface BinMoveMapProps {
   onSelectTruck: (id: string | null) => void;
 }
 
-function FlyTo({ position }: { position: [number, number] | null }) {
+function MapRefBinder({ mapRef }: { mapRef: React.MutableRefObject<LeafletMap | null> }) {
   const map = useMap();
   useEffect(() => {
-    if (position) map.flyTo(position, 15, { duration: 0.8 });
-  }, [position, map]);
+    mapRef.current = map;
+  }, [map, mapRef]);
   return null;
 }
 

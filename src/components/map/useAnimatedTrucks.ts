@@ -23,16 +23,19 @@ function bearingBetween(a: [number, number], b: [number, number]) {
 }
 
 export function useAnimatedTrucks(routes: TruckRoute[]) {
-  const [trucks, setTrucks] = useState<AnimatedTruck[]>(() =>
-    routes.map((r, i) => ({
-      route: r,
-      position: r.path[0],
-      bearing: bearingBetween(r.path[0], r.path[1]),
-      segmentIndex: 0,
-      // stagger so they don't overlap at start
-      progress: (i * 0.27) % 1,
-    })),
-  );
+  const [trucks, setTrucks] = useState<AnimatedTruck[]>([]);
+
+  useEffect(() => {
+    setTrucks(
+      routes.map((r, i) => ({
+        route: r,
+        position: r.path[0],
+        bearing: bearingBetween(r.path[0], r.path[1] ?? r.path[0]),
+        segmentIndex: 0,
+        progress: (i * 0.27) % 1,
+      })),
+    );
+  }, [routes]);
   const rafRef = useRef<number>();
   const lastUpdateRef = useRef<number>(0);
 

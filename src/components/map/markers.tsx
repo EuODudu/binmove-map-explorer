@@ -57,3 +57,23 @@ export function createTruckIcon(bearing = 0, color = "#22c55e") {
     popupAnchor: [0, -24],
   });
 }
+
+export function createCategoryBadgeIcon(category: WasteCategory) {
+  const meta = CATEGORY_META[category];
+  const html = `
+    <div style="
+      width:24px;height:24px;
+      background:${meta.color};
+      border-radius:9999px;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 0 0 2px hsl(0 0% 5%/0.9), 0 0 10px ${meta.color}aa;
+      border:1.5px solid #0a0a0a;
+      font-size:12px;line-height:1;
+    "><span>${meta.emoji}</span></div>`;
+  return L.divIcon({
+    html,
+    className: "binmove-route-badge",
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+  });
+}

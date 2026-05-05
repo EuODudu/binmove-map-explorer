@@ -111,6 +111,11 @@ export default function MapSection() {
           </div>
         </div>
 
+        <TruckDetailsDialog
+          truck={TRUCK_ROUTES.find((t) => t.id === selectedTruckId) ?? null}
+          onClose={() => setSelectedTruckId(null)}
+        />
+
         {/* Stat bar */}
         <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
           <StatCard

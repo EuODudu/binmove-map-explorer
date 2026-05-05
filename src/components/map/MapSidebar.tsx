@@ -1,7 +1,11 @@
-import { Recycle, Leaf, Lightbulb, Trash2, Truck, Route, MapPin, MapPinned } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Recycle, Leaf, Lightbulb, Trash2, Truck, Route, MapPin, MapPinned, Plus, Sparkles } from "lucide-react";
 import { CATEGORY_META, COLLECTION_POINTS, type WasteCategory } from "@/data/collectionPoints";
 import { TRUCK_ROUTES } from "@/data/truckRoutes";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import SuggestionDialog, { loadSuggestions, type Suggestion } from "./SuggestionDialog";
+import SuggestionsList from "./SuggestionsList";
 
 import type { LucideIcon } from "lucide-react";
 

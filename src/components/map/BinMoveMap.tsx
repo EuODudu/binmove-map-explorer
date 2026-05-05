@@ -75,7 +75,7 @@ export default function BinMoveMap({
             }
           }
           return (
-            <div key={r.id}>
+            <Fragment key={r.id}>
               <Polyline
                 positions={r.path}
                 pathOptions={{
@@ -94,7 +94,7 @@ export default function BinMoveMap({
                   interactive={false}
                 />
               ))}
-            </div>
+            </Fragment>
           );
         })}
 

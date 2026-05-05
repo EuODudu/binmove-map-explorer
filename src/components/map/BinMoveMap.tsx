@@ -29,6 +29,7 @@ export default function BinMoveMap({
   activeCategories,
   showTrucks,
   showRoutes,
+  showPoints,
   selectedPointId,
   selectedTruckId,
   onSelectPoint,

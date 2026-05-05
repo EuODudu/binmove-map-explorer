@@ -14,6 +14,7 @@ export default function MapSection() {
   );
   const [showTrucks, setShowTrucks] = useState(true);
   const [showRoutes, setShowRoutes] = useState(true);
+  const [showPoints, setShowPoints] = useState(true);
   const [selectedPoint, setSelectedPoint] = useState<CollectionPoint | null>(null);
   const [selectedTruckId, setSelectedTruckId] = useState<string | null>(null);
 

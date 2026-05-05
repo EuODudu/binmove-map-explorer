@@ -1,7 +1,11 @@
-import { Recycle, Leaf, Lightbulb, Trash2, Truck, Route, MapPin, MapPinned } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Recycle, Leaf, Lightbulb, Trash2, Truck, Route, MapPin, MapPinned, Plus, Sparkles } from "lucide-react";
 import { CATEGORY_META, COLLECTION_POINTS, type WasteCategory } from "@/data/collectionPoints";
 import { TRUCK_ROUTES } from "@/data/truckRoutes";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import SuggestionDialog, { loadSuggestions, type Suggestion } from "./SuggestionDialog";
+import SuggestionsList from "./SuggestionsList";
 
 import type { LucideIcon } from "lucide-react";
 
@@ -39,9 +43,20 @@ export default function MapSidebar({
 }: MapSidebarProps) {
   const cats = Object.keys(CATEGORY_META) as WasteCategory[];
   const visibleCount = COLLECTION_POINTS.filter((p) => activeCategories.has(p.category)).length;
+  const [suggestOpen, setSuggestOpen] = useState(false);
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+
+  useEffect(() => {
+    setSuggestions(loadSuggestions());
+  }, []);
 
   return (
     <aside className="flex h-full w-full flex-col gap-5 overflow-y-auto rounded-2xl border border-border bg-card/60 p-5 backdrop-blur-sm lg:w-[340px]">
+      <SuggestionDialog
+        open={suggestOpen}
+        onOpenChange={setSuggestOpen}
+        onCreated={() => setSuggestions(loadSuggestions())}
+      />
       <div>
         <h3 className="font-display text-sm font-semibold uppercase tracking-widest text-primary">
           Filtros
@@ -160,11 +175,28 @@ export default function MapSidebar({
         </div>
       </div>
 
+      <div>
+        <div className="flex items-center justify-between">
+          <h3 className="font-display text-sm font-semibold uppercase tracking-widest text-primary">
+            Sugestões da comunidade
+          </h3>
+          <Sparkles className="h-3.5 w-3.5 text-primary" />
+        </div>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Indique regiões mal atendidas. Aprovadas viram pontos/rotas oficiais.
+        </p>
+        <Button size="sm" className="mt-3 w-full" onClick={() => setSuggestOpen(true)}>
+          <Plus className="h-4 w-4" />
+          Sugerir rota ou ponto
+        </Button>
+        <div className="mt-3">
+          <SuggestionsList items={suggestions} />
+        </div>
+      </div>
+
       <div className="flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 p-3 text-xs text-muted-foreground">
         <MapPin className="h-4 w-4 shrink-0 text-primary" />
-        <span>
-          Clique em um ponto ou caminhão para ver detalhes em tempo real.
-        </span>
+        <span>Clique em um ponto ou caminhão para ver detalhes em tempo real.</span>
       </div>
     </aside>
   );

@@ -1,4 +1,4 @@
-import { Recycle, Leaf, Lightbulb, Wine, Trash2, Truck, Route, MapPin } from "lucide-react";
+import { Recycle, Leaf, Lightbulb, Trash2, Truck, Route, MapPin } from "lucide-react";
 import { CATEGORY_META, COLLECTION_POINTS, type WasteCategory } from "@/data/collectionPoints";
 import { TRUCK_ROUTES } from "@/data/truckRoutes";
 import { cn } from "@/lib/utils";
@@ -9,7 +9,6 @@ const CATEGORY_ICON: Record<WasteCategory, LucideIcon> = {
   reciclavel: Recycle,
   organico: Leaf,
   eletronico: Lightbulb,
-  vidro: Wine,
   misto: Trash2,
 };
 

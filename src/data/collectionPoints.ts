@@ -1,4 +1,4 @@
-export type WasteCategory = "reciclavel" | "organico" | "eletronico" | "vidro" | "misto";
+export type WasteCategory = "reciclavel" | "organico" | "eletronico" | "misto";
 
 export interface CollectionPoint {
   id: string;
@@ -19,7 +19,6 @@ export const CATEGORY_META: Record<
   reciclavel: { label: "Reciclável", color: "#22c55e", emoji: "♻️" },
   organico: { label: "Orgânico", color: "#84cc16", emoji: "🍃" },
   eletronico: { label: "Eletrônico", color: "#06b6d4", emoji: "💡" },
-  vidro: { label: "Vidro", color: "#a78bfa", emoji: "🍾" },
   misto: { label: "Misto", color: "#f59e0b", emoji: "🗑️" },
 };
 
@@ -41,7 +40,7 @@ export const COLLECTION_POINTS: CollectionPoint[] = [
     name: "Coleta Vila Madalena",
     neighborhood: "Vila Madalena",
     address: "R. Harmonia, 256",
-    category: "vidro",
+    category: "reciclavel",
     hours: "08:00 — 20:00",
     status: "aberto",
     position: [-23.5546, -46.6912],
@@ -118,7 +117,7 @@ export const COLLECTION_POINTS: CollectionPoint[] = [
     name: "Estação Lapa",
     neighborhood: "Lapa",
     address: "R. Guaicurus, 1280",
-    category: "vidro",
+    category: "reciclavel",
     hours: "08:00 — 20:00",
     status: "aberto",
     position: [-23.5274, -46.7045],
@@ -184,7 +183,7 @@ export const COLLECTION_POINTS: CollectionPoint[] = [
     name: "Ponto Brooklin",
     neighborhood: "Brooklin",
     address: "Av. Santo Amaro, 4783",
-    category: "vidro",
+    category: "reciclavel",
     hours: "08:00 — 20:00",
     status: "aberto",
     position: [-23.6112, -46.6936],

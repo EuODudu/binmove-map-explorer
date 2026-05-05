@@ -18,6 +18,8 @@ export const CATEGORY_META: Record<
 > = {
   reciclavel: { label: "Reciclável", color: "#22c55e", emoji: "♻️" },
   organico: { label: "Orgânico", color: "#84cc16", emoji: "🍃" },
+  eletronico: { label: "Eletrônico", color: "#06b6d4", emoji: "💡" },
+  misto: { label: "Misto", color: "#f59e0b", emoji: "🗑️" },
 };
 
 // 18 collection points across central / south / west São Paulo

@@ -134,9 +134,16 @@ export default function SuggestionDialog({ open, onOpenChange, onCreated }: Prop
       setErrors(fieldErrors);
       return;
     }
+    const d = parsed.data;
     const newItem: Suggestion = {
       id: `s-${Date.now()}`,
-      ...parsed.data,
+      type: d.type,
+      category: d.category,
+      neighborhood: d.neighborhood,
+      address: d.address,
+      reason: d.reason,
+      authorName: d.authorName,
+      authorContact: d.authorContact,
       createdAt: Date.now(),
       status: "pendente",
     };

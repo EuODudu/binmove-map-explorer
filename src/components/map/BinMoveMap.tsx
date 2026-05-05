@@ -10,6 +10,7 @@ import {
 import { TRUCK_ROUTES } from "@/data/truckRoutes";
 import { createPointIcon, createTruckIcon } from "./markers";
 import { useAnimatedTrucks } from "./useAnimatedTrucks";
+import { useStreetRoutes } from "./useStreetRoutes";
 
 interface BinMoveMapProps {
   activeCategories: Set<WasteCategory>;
@@ -32,7 +33,8 @@ export default function BinMoveMap({
   onSelectPoint,
   onSelectTruck,
 }: BinMoveMapProps) {
-  const trucks = useAnimatedTrucks(TRUCK_ROUTES);
+  const streetRoutes = useStreetRoutes(TRUCK_ROUTES);
+  const trucks = useAnimatedTrucks(streetRoutes);
   const trucksRef = useRef(trucks);
   trucksRef.current = trucks;
   const mapRef = useRef<LeafletMap | null>(null);
@@ -71,7 +73,7 @@ export default function BinMoveMap({
       />
 
       {showRoutes &&
-        TRUCK_ROUTES.map((r) => {
+        streetRoutes.map((r) => {
           const isSelected = selectedTruckId === r.id;
           return (
             <Polyline

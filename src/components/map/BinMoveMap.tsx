@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
-import { useEffect, useMemo, useRef } from "react";
-import type { Map as LeafletMap } from "leaflet";
+import { useMemo } from "react";
 import {
   COLLECTION_POINTS,
   CATEGORY_META,
@@ -11,6 +10,7 @@ import { TRUCK_ROUTES } from "@/data/truckRoutes";
 import { createPointIcon, createTruckIcon } from "./markers";
 import { useAnimatedTrucks } from "./useAnimatedTrucks";
 import { useStreetRoutes } from "./useStreetRoutes";
+import MapSelectionController from "./MapSelectionController";
 
 interface BinMoveMapProps {
   activeCategories: Set<WasteCategory>;
@@ -35,28 +35,11 @@ export default function BinMoveMap({
 }: BinMoveMapProps) {
   const streetRoutes = useStreetRoutes(TRUCK_ROUTES);
   const trucks = useAnimatedTrucks(streetRoutes);
-  const trucksRef = useRef(trucks);
-  trucksRef.current = trucks;
-  const mapRef = useRef<LeafletMap | null>(null);
 
   const visiblePoints = useMemo(
     () => COLLECTION_POINTS.filter((p) => activeCategories.has(p.category)),
     [activeCategories],
   );
-
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map) return;
-    let target: [number, number] | null = null;
-    if (selectedPointId) {
-      const p = COLLECTION_POINTS.find((x) => x.id === selectedPointId);
-      target = p ? p.position : null;
-    } else if (selectedTruckId) {
-      const t = trucksRef.current.find((x) => x.route.id === selectedTruckId);
-      target = t ? t.position : null;
-    }
-    if (target) map.flyTo(target, 15, { duration: 0.8 });
-  }, [selectedPointId, selectedTruckId]);
 
   return (
     <MapContainer
@@ -65,8 +48,13 @@ export default function BinMoveMap({
       scrollWheelZoom
       className="h-full w-full rounded-2xl"
       attributionControl
-      ref={mapRef}
     >
+      <MapSelectionController
+        selectedPointId={selectedPointId}
+        selectedTruckId={selectedTruckId}
+        trucks={trucks}
+      />
+
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"

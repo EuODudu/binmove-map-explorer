@@ -7,7 +7,7 @@ import {
   type CollectionPoint,
 } from "@/data/collectionPoints";
 import { TRUCK_ROUTES } from "@/data/truckRoutes";
-import { createPointIcon, createTruckIcon } from "./markers";
+import { createPointIcon, createTruckIcon, createCategoryBadgeIcon } from "./markers";
 import { useAnimatedTrucks } from "./useAnimatedTrucks";
 import { useStreetRoutes } from "./useStreetRoutes";
 import MapSelectionController from "./MapSelectionController";

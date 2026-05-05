@@ -1,4 +1,4 @@
-import { Recycle, Leaf, Lightbulb, Trash2, Truck, Route, MapPin } from "lucide-react";
+import { Recycle, Leaf, Lightbulb, Trash2, Truck, Route, MapPin, MapPinned } from "lucide-react";
 import { CATEGORY_META, COLLECTION_POINTS, type WasteCategory } from "@/data/collectionPoints";
 import { TRUCK_ROUTES } from "@/data/truckRoutes";
 import { cn } from "@/lib/utils";

@@ -92,6 +92,12 @@ export default function MapSidebar({
           active={showRoutes}
           onChange={setShowRoutes}
         />
+        <ToggleRow
+          icon={<MapPinned className="h-4 w-4" />}
+          label="Pontos de coleta"
+          active={showPoints}
+          onChange={setShowPoints}
+        />
       </div>
 
       <div className="flex-1">

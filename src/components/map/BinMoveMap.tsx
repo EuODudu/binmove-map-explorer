@@ -100,7 +100,7 @@ export default function BinMoveMap({
           );
         })}
 
-      {visiblePoints.map((p) => (
+      {showPoints && visiblePoints.map((p) => (
         <Marker
           key={p.id}
           position={p.position}

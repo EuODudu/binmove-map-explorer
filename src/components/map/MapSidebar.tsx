@@ -175,11 +175,28 @@ export default function MapSidebar({
         </div>
       </div>
 
+      <div>
+        <div className="flex items-center justify-between">
+          <h3 className="font-display text-sm font-semibold uppercase tracking-widest text-primary">
+            Sugestões da comunidade
+          </h3>
+          <Sparkles className="h-3.5 w-3.5 text-primary" />
+        </div>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Indique regiões mal atendidas. Aprovadas viram pontos/rotas oficiais.
+        </p>
+        <Button size="sm" className="mt-3 w-full" onClick={() => setSuggestOpen(true)}>
+          <Plus className="h-4 w-4" />
+          Sugerir rota ou ponto
+        </Button>
+        <div className="mt-3">
+          <SuggestionsList items={suggestions} />
+        </div>
+      </div>
+
       <div className="flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 p-3 text-xs text-muted-foreground">
         <MapPin className="h-4 w-4 shrink-0 text-primary" />
-        <span>
-          Clique em um ponto ou caminhão para ver detalhes em tempo real.
-        </span>
+        <span>Clique em um ponto ou caminhão para ver detalhes em tempo real.</span>
       </div>
     </aside>
   );

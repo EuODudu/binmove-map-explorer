@@ -2,6 +2,7 @@ import { lazy, Suspense, useState } from "react";
 import { CATEGORY_META, type WasteCategory, type CollectionPoint, COLLECTION_POINTS } from "@/data/collectionPoints";
 import { TRUCK_ROUTES } from "@/data/truckRoutes";
 import MapSidebar from "./MapSidebar";
+import TruckDetailsDialog from "./TruckDetailsDialog";
 import { Recycle, Truck, Leaf, MapPinned } from "lucide-react";
 
 const BinMoveMap = lazy(() => import("./BinMoveMap"));
@@ -109,6 +110,11 @@ export default function MapSection() {
             />
           </div>
         </div>
+
+        <TruckDetailsDialog
+          truck={TRUCK_ROUTES.find((t) => t.id === selectedTruckId) ?? null}
+          onClose={() => setSelectedTruckId(null)}
+        />
 
         {/* Stat bar */}
         <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">

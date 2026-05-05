@@ -1,22 +1,57 @@
 import type { WasteCategory } from "@/data/collectionPoints";
 
+export interface CrewMember {
+  name: string;
+  role: "Motorista" | "Coletor" | "Auxiliar" | "Supervisor";
+  age: number;
+  experience: string; // e.g. "5 anos"
+  shift: string; // e.g. "06h - 14h"
+  phone: string;
+  photo: string; // avatar URL
+}
+
+export interface TruckInfo {
+  model: string;
+  year: number;
+  fleetNumber: string;
+  capacityKg: number;
+  fuel: "Diesel" | "Elétrico" | "GNV" | "Híbrido";
+  lastMaintenance: string; // ISO date
+  nextMaintenance: string; // ISO date
+  km: number;
+  photo: string;
+}
+
 export interface TruckRoute {
   id: string;
   plate: string;
   driver: string;
   category: WasteCategory;
-  capacity: number; // 0-100
+  capacity: number; // 0-100 (carga atual)
   path: [number, number][];
+  truck: TruckInfo;
+  crew: CrewMember[];
+  zone: string; // bairro / região
+  startedAt: string; // hora início turno
+  collectionsToday: number;
 }
 
+const avatar = (seed: string) =>
+  `https://api.dicebear.com/7.x/personas/svg?seed=${encodeURIComponent(seed)}&backgroundColor=14532d,166534,15803d,22c55e`;
+
+const truckPhoto = (seed: string) =>
+  `https://api.dicebear.com/7.x/shapes/svg?seed=${encodeURIComponent(seed)}&backgroundColor=052e16,14532d`;
+
 export const TRUCK_ROUTES: TruckRoute[] = [
-  // ---------- Pinheiros ----------
   {
     id: "t1",
     plate: "BIN-1842",
-    driver: "Carlos M.",
+    driver: "Carlos Mendes",
     category: "reciclavel",
     capacity: 62,
+    zone: "Pinheiros",
+    startedAt: "06:00",
+    collectionsToday: 23,
     path: [
       [-23.5620, -46.6810],
       [-23.5680, -46.6880],
@@ -25,14 +60,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5590, -46.6920],
       [-23.5620, -46.6810],
     ],
+    truck: {
+      model: "Mercedes-Benz Atego 1719",
+      year: 2022,
+      fleetNumber: "FR-018",
+      capacityKg: 8500,
+      fuel: "Diesel",
+      lastMaintenance: "2026-04-12",
+      nextMaintenance: "2026-06-12",
+      km: 48230,
+      photo: truckPhoto("BIN-1842"),
+    },
+    crew: [
+      { name: "Carlos Mendes", role: "Motorista", age: 42, experience: "12 anos", shift: "06h - 14h", phone: "(11) 9 8123-4567", photo: avatar("Carlos Mendes") },
+      { name: "Tiago Souza", role: "Coletor", age: 29, experience: "5 anos", shift: "06h - 14h", phone: "(11) 9 8765-1122", photo: avatar("Tiago Souza") },
+      { name: "Rodrigo Lima", role: "Coletor", age: 34, experience: "8 anos", shift: "06h - 14h", phone: "(11) 9 9912-3344", photo: avatar("Rodrigo Lima") },
+    ],
   },
-  // ---------- Vila Madalena ----------
   {
     id: "t2",
     plate: "BIN-2310",
-    driver: "Ana P.",
+    driver: "Ana Pereira",
     category: "organico",
     capacity: 38,
+    zone: "Vila Madalena",
+    startedAt: "05:30",
+    collectionsToday: 17,
     path: [
       [-23.5510, -46.6870],
       [-23.5560, -46.6940],
@@ -41,14 +94,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5455, -46.6900],
       [-23.5510, -46.6870],
     ],
+    truck: {
+      model: "Volkswagen Constellation 17.230",
+      year: 2021,
+      fleetNumber: "FR-022",
+      capacityKg: 7800,
+      fuel: "Diesel",
+      lastMaintenance: "2026-03-28",
+      nextMaintenance: "2026-05-28",
+      km: 62110,
+      photo: truckPhoto("BIN-2310"),
+    },
+    crew: [
+      { name: "Ana Pereira", role: "Motorista", age: 38, experience: "10 anos", shift: "05h - 13h", phone: "(11) 9 8334-5566", photo: avatar("Ana Pereira") },
+      { name: "Marcelo Dias", role: "Coletor", age: 31, experience: "6 anos", shift: "05h - 13h", phone: "(11) 9 8221-7788", photo: avatar("Marcelo Dias") },
+      { name: "Vinicius Alves", role: "Auxiliar", age: 24, experience: "2 anos", shift: "05h - 13h", phone: "(11) 9 9001-2233", photo: avatar("Vinicius Alves") },
+    ],
   },
-  // ---------- Higienópolis ----------
   {
     id: "t3",
     plate: "BIN-0975",
-    driver: "Rafael S.",
+    driver: "Rafael Silva",
     category: "eletronico",
     capacity: 81,
+    zone: "Higienópolis",
+    startedAt: "07:00",
+    collectionsToday: 9,
     path: [
       [-23.5410, -46.6520],
       [-23.5460, -46.6580],
@@ -57,14 +128,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5360, -46.6560],
       [-23.5410, -46.6520],
     ],
+    truck: {
+      model: "Iveco Tector 11-190 Elétrico",
+      year: 2024,
+      fleetNumber: "FR-031",
+      capacityKg: 6500,
+      fuel: "Elétrico",
+      lastMaintenance: "2026-04-20",
+      nextMaintenance: "2026-07-20",
+      km: 12450,
+      photo: truckPhoto("BIN-0975"),
+    },
+    crew: [
+      { name: "Rafael Silva", role: "Motorista", age: 45, experience: "15 anos", shift: "07h - 15h", phone: "(11) 9 8445-9900", photo: avatar("Rafael Silva") },
+      { name: "Felipe Castro", role: "Coletor", age: 28, experience: "4 anos", shift: "07h - 15h", phone: "(11) 9 8112-3344", photo: avatar("Felipe Castro") },
+      { name: "Diego Nogueira", role: "Supervisor", age: 39, experience: "11 anos", shift: "07h - 15h", phone: "(11) 9 9988-7766", photo: avatar("Diego Nogueira") },
+    ],
   },
-  // ---------- Bela Vista ----------
   {
     id: "t4",
     plate: "BIN-3677",
-    driver: "Juliana R.",
+    driver: "Juliana Rocha",
     category: "reciclavel",
     capacity: 24,
+    zone: "Bela Vista",
+    startedAt: "06:00",
+    collectionsToday: 11,
     path: [
       [-23.5630, -46.6430],
       [-23.5690, -46.6480],
@@ -73,14 +162,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5620, -46.6530],
       [-23.5630, -46.6430],
     ],
+    truck: {
+      model: "Ford Cargo 1719",
+      year: 2020,
+      fleetNumber: "FR-007",
+      capacityKg: 8000,
+      fuel: "Diesel",
+      lastMaintenance: "2026-04-02",
+      nextMaintenance: "2026-06-02",
+      km: 78900,
+      photo: truckPhoto("BIN-3677"),
+    },
+    crew: [
+      { name: "Juliana Rocha", role: "Motorista", age: 36, experience: "9 anos", shift: "06h - 14h", phone: "(11) 9 8556-7788", photo: avatar("Juliana Rocha") },
+      { name: "Pedro Henrique", role: "Coletor", age: 26, experience: "3 anos", shift: "06h - 14h", phone: "(11) 9 8221-9988", photo: avatar("Pedro Henrique") },
+      { name: "Lucas Oliveira", role: "Coletor", age: 32, experience: "7 anos", shift: "06h - 14h", phone: "(11) 9 9112-4455", photo: avatar("Lucas Oliveira") },
+    ],
   },
-  // ---------- Moema ----------
   {
     id: "t5",
     plate: "BIN-4521",
-    driver: "Marcos L.",
+    driver: "Marcos Lopes",
     category: "organico",
     capacity: 55,
+    zone: "Moema",
+    startedAt: "05:00",
+    collectionsToday: 19,
     path: [
       [-23.6030, -46.6620],
       [-23.6090, -46.6680],
@@ -89,14 +196,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.6000, -46.6710],
       [-23.6030, -46.6620],
     ],
+    truck: {
+      model: "Scania P 280 GNV",
+      year: 2023,
+      fleetNumber: "FR-040",
+      capacityKg: 9000,
+      fuel: "GNV",
+      lastMaintenance: "2026-04-15",
+      nextMaintenance: "2026-06-15",
+      km: 31200,
+      photo: truckPhoto("BIN-4521"),
+    },
+    crew: [
+      { name: "Marcos Lopes", role: "Motorista", age: 41, experience: "13 anos", shift: "05h - 13h", phone: "(11) 9 8667-3322", photo: avatar("Marcos Lopes") },
+      { name: "Joaquim Bento", role: "Coletor", age: 35, experience: "8 anos", shift: "05h - 13h", phone: "(11) 9 8334-9911", photo: avatar("Joaquim Bento") },
+      { name: "André Barros", role: "Auxiliar", age: 22, experience: "1 ano", shift: "05h - 13h", phone: "(11) 9 9223-1100", photo: avatar("André Barros") },
+    ],
   },
-  // ---------- Vila Mariana ----------
   {
     id: "t6",
     plate: "BIN-5089",
-    driver: "Patrícia G.",
+    driver: "Patrícia Gomes",
     category: "eletronico",
     capacity: 47,
+    zone: "Vila Mariana",
+    startedAt: "08:00",
+    collectionsToday: 6,
     path: [
       [-23.5860, -46.6310],
       [-23.5920, -46.6360],
@@ -105,14 +230,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5860, -46.6400],
       [-23.5860, -46.6310],
     ],
+    truck: {
+      model: "Mercedes-Benz Accelo 1316 Híbrido",
+      year: 2024,
+      fleetNumber: "FR-045",
+      capacityKg: 6000,
+      fuel: "Híbrido",
+      lastMaintenance: "2026-04-25",
+      nextMaintenance: "2026-07-25",
+      km: 9870,
+      photo: truckPhoto("BIN-5089"),
+    },
+    crew: [
+      { name: "Patrícia Gomes", role: "Motorista", age: 33, experience: "7 anos", shift: "08h - 16h", phone: "(11) 9 8778-2211", photo: avatar("Patrícia Gomes") },
+      { name: "Sandro Vieira", role: "Coletor", age: 30, experience: "5 anos", shift: "08h - 16h", phone: "(11) 9 8445-6677", photo: avatar("Sandro Vieira") },
+      { name: "Roberta Lima", role: "Supervisor", age: 37, experience: "10 anos", shift: "08h - 16h", phone: "(11) 9 9112-8899", photo: avatar("Roberta Lima") },
+    ],
   },
-  // ---------- Itaim Bibi ----------
   {
     id: "t7",
     plate: "BIN-6634",
-    driver: "Felipe T.",
+    driver: "Felipe Teixeira",
     category: "reciclavel",
     capacity: 70,
+    zone: "Itaim Bibi",
+    startedAt: "06:30",
+    collectionsToday: 21,
     path: [
       [-23.5780, -46.6720],
       [-23.5830, -46.6770],
@@ -121,14 +264,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5780, -46.6810],
       [-23.5780, -46.6720],
     ],
+    truck: {
+      model: "Volvo VM 270",
+      year: 2022,
+      fleetNumber: "FR-026",
+      capacityKg: 8800,
+      fuel: "Diesel",
+      lastMaintenance: "2026-04-08",
+      nextMaintenance: "2026-06-08",
+      km: 54320,
+      photo: truckPhoto("BIN-6634"),
+    },
+    crew: [
+      { name: "Felipe Teixeira", role: "Motorista", age: 40, experience: "14 anos", shift: "06h - 14h", phone: "(11) 9 8889-1122", photo: avatar("Felipe Teixeira") },
+      { name: "Caio Ferreira", role: "Coletor", age: 27, experience: "4 anos", shift: "06h - 14h", phone: "(11) 9 8556-3344", photo: avatar("Caio Ferreira") },
+      { name: "Marcos Aurélio", role: "Coletor", age: 33, experience: "7 anos", shift: "06h - 14h", phone: "(11) 9 9001-5566", photo: avatar("Marcos Aurélio") },
+    ],
   },
-  // ---------- Perdizes ----------
   {
     id: "t8",
     plate: "BIN-7720",
-    driver: "Luana D.",
+    driver: "Luana Duarte",
     category: "organico",
     capacity: 33,
+    zone: "Perdizes",
+    startedAt: "05:30",
+    collectionsToday: 14,
     path: [
       [-23.5310, -46.6700],
       [-23.5360, -46.6760],
@@ -137,14 +298,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5310, -46.6790],
       [-23.5310, -46.6700],
     ],
+    truck: {
+      model: "Iveco Daily 70C17",
+      year: 2021,
+      fleetNumber: "FR-014",
+      capacityKg: 7000,
+      fuel: "Diesel",
+      lastMaintenance: "2026-03-30",
+      nextMaintenance: "2026-05-30",
+      km: 66700,
+      photo: truckPhoto("BIN-7720"),
+    },
+    crew: [
+      { name: "Luana Duarte", role: "Motorista", age: 35, experience: "9 anos", shift: "05h - 13h", phone: "(11) 9 8990-3344", photo: avatar("Luana Duarte") },
+      { name: "Ricardo Pinto", role: "Coletor", age: 28, experience: "4 anos", shift: "05h - 13h", phone: "(11) 9 8667-5566", photo: avatar("Ricardo Pinto") },
+      { name: "Erick Tavares", role: "Auxiliar", age: 23, experience: "1 ano", shift: "05h - 13h", phone: "(11) 9 9112-7788", photo: avatar("Erick Tavares") },
+    ],
   },
-  // ---------- Tatuapé ----------
   {
     id: "t9",
     plate: "BIN-8412",
-    driver: "Bruno A.",
+    driver: "Bruno Almeida",
     category: "misto",
     capacity: 58,
+    zone: "Tatuapé",
+    startedAt: "06:00",
+    collectionsToday: 16,
     path: [
       [-23.5380, -46.5710],
       [-23.5430, -46.5770],
@@ -153,14 +332,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5380, -46.5800],
       [-23.5380, -46.5710],
     ],
+    truck: {
+      model: "Ford Cargo 2429",
+      year: 2020,
+      fleetNumber: "FR-009",
+      capacityKg: 9500,
+      fuel: "Diesel",
+      lastMaintenance: "2026-04-05",
+      nextMaintenance: "2026-06-05",
+      km: 82100,
+      photo: truckPhoto("BIN-8412"),
+    },
+    crew: [
+      { name: "Bruno Almeida", role: "Motorista", age: 44, experience: "16 anos", shift: "06h - 14h", phone: "(11) 9 8001-2233", photo: avatar("Bruno Almeida") },
+      { name: "Henrique Sá", role: "Coletor", age: 31, experience: "6 anos", shift: "06h - 14h", phone: "(11) 9 8778-9900", photo: avatar("Henrique Sá") },
+      { name: "Wesley Mota", role: "Coletor", age: 29, experience: "5 anos", shift: "06h - 14h", phone: "(11) 9 9445-1122", photo: avatar("Wesley Mota") },
+    ],
   },
-  // ---------- Mooca ----------
   {
     id: "t10",
     plate: "BIN-9156",
-    driver: "Camila V.",
+    driver: "Camila Vargas",
     category: "reciclavel",
     capacity: 41,
+    zone: "Mooca",
+    startedAt: "07:00",
+    collectionsToday: 13,
     path: [
       [-23.5550, -46.5900],
       [-23.5600, -46.5960],
@@ -169,14 +366,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5550, -46.5990],
       [-23.5550, -46.5900],
     ],
+    truck: {
+      model: "Mercedes-Benz Atego 1419",
+      year: 2023,
+      fleetNumber: "FR-038",
+      capacityKg: 8200,
+      fuel: "Diesel",
+      lastMaintenance: "2026-04-18",
+      nextMaintenance: "2026-06-18",
+      km: 27600,
+      photo: truckPhoto("BIN-9156"),
+    },
+    crew: [
+      { name: "Camila Vargas", role: "Motorista", age: 32, experience: "8 anos", shift: "07h - 15h", phone: "(11) 9 8112-5566", photo: avatar("Camila Vargas") },
+      { name: "Júlio Ramos", role: "Coletor", age: 27, experience: "3 anos", shift: "07h - 15h", phone: "(11) 9 8889-7788", photo: avatar("Júlio Ramos") },
+      { name: "Rafael Borges", role: "Coletor", age: 30, experience: "5 anos", shift: "07h - 15h", phone: "(11) 9 9223-3344", photo: avatar("Rafael Borges") },
+    ],
   },
-  // ---------- Santana ----------
   {
     id: "t11",
     plate: "BIN-1023",
-    driver: "Diego R.",
+    driver: "Diego Ribeiro",
     category: "organico",
     capacity: 67,
+    zone: "Santana",
+    startedAt: "05:00",
+    collectionsToday: 22,
     path: [
       [-23.5010, -46.6190],
       [-23.5060, -46.6250],
@@ -185,14 +400,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5010, -46.6280],
       [-23.5010, -46.6190],
     ],
+    truck: {
+      model: "Volkswagen Delivery 11.180",
+      year: 2022,
+      fleetNumber: "FR-024",
+      capacityKg: 7500,
+      fuel: "Diesel",
+      lastMaintenance: "2026-04-10",
+      nextMaintenance: "2026-06-10",
+      km: 41200,
+      photo: truckPhoto("BIN-1023"),
+    },
+    crew: [
+      { name: "Diego Ribeiro", role: "Motorista", age: 39, experience: "11 anos", shift: "05h - 13h", phone: "(11) 9 8334-2211", photo: avatar("Diego Ribeiro") },
+      { name: "Otávio Pires", role: "Coletor", age: 30, experience: "5 anos", shift: "05h - 13h", phone: "(11) 9 8556-9988", photo: avatar("Otávio Pires") },
+      { name: "Sérgio Andrade", role: "Auxiliar", age: 25, experience: "2 anos", shift: "05h - 13h", phone: "(11) 9 9112-3322", photo: avatar("Sérgio Andrade") },
+    ],
   },
-  // ---------- Lapa ----------
   {
     id: "t12",
     plate: "BIN-2287",
-    driver: "Eduarda M.",
+    driver: "Eduarda Martins",
     category: "misto",
     capacity: 29,
+    zone: "Lapa",
+    startedAt: "06:30",
+    collectionsToday: 8,
     path: [
       [-23.5240, -46.6990],
       [-23.5290, -46.7050],
@@ -201,14 +434,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5240, -46.7080],
       [-23.5240, -46.6990],
     ],
+    truck: {
+      model: "Scania P 250",
+      year: 2021,
+      fleetNumber: "FR-019",
+      capacityKg: 8500,
+      fuel: "Diesel",
+      lastMaintenance: "2026-03-22",
+      nextMaintenance: "2026-05-22",
+      km: 71500,
+      photo: truckPhoto("BIN-2287"),
+    },
+    crew: [
+      { name: "Eduarda Martins", role: "Motorista", age: 34, experience: "8 anos", shift: "06h - 14h", phone: "(11) 9 8667-1100", photo: avatar("Eduarda Martins") },
+      { name: "Fabiano Costa", role: "Coletor", age: 32, experience: "6 anos", shift: "06h - 14h", phone: "(11) 9 8889-4455", photo: avatar("Fabiano Costa") },
+      { name: "Igor Moraes", role: "Coletor", age: 28, experience: "4 anos", shift: "06h - 14h", phone: "(11) 9 9445-7766", photo: avatar("Igor Moraes") },
+    ],
   },
-  // ---------- Saúde ----------
   {
     id: "t13",
     plate: "BIN-3540",
-    driver: "Henrique B.",
+    driver: "Henrique Barbosa",
     category: "reciclavel",
     capacity: 52,
+    zone: "Saúde",
+    startedAt: "06:00",
+    collectionsToday: 18,
     path: [
       [-23.6250, -46.6360],
       [-23.6300, -46.6420],
@@ -217,14 +468,32 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.6250, -46.6450],
       [-23.6250, -46.6360],
     ],
+    truck: {
+      model: "Mercedes-Benz Atego 1719",
+      year: 2023,
+      fleetNumber: "FR-035",
+      capacityKg: 8500,
+      fuel: "Diesel",
+      lastMaintenance: "2026-04-14",
+      nextMaintenance: "2026-06-14",
+      km: 22800,
+      photo: truckPhoto("BIN-3540"),
+    },
+    crew: [
+      { name: "Henrique Barbosa", role: "Motorista", age: 37, experience: "10 anos", shift: "06h - 14h", phone: "(11) 9 8001-9988", photo: avatar("Henrique Barbosa") },
+      { name: "Daniel Prado", role: "Coletor", age: 29, experience: "5 anos", shift: "06h - 14h", phone: "(11) 9 8778-3344", photo: avatar("Daniel Prado") },
+      { name: "Leonardo Reis", role: "Coletor", age: 31, experience: "6 anos", shift: "06h - 14h", phone: "(11) 9 9223-5566", photo: avatar("Leonardo Reis") },
+    ],
   },
-  // ---------- Santa Cecília ----------
   {
     id: "t14",
     plate: "BIN-4798",
-    driver: "Isabela K.",
+    driver: "Isabela Krause",
     category: "organico",
     capacity: 44,
+    zone: "Santa Cecília",
+    startedAt: "05:30",
+    collectionsToday: 15,
     path: [
       [-23.5200, -46.6500],
       [-23.5250, -46.6560],
@@ -232,6 +501,22 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5260, -46.6660],
       [-23.5200, -46.6590],
       [-23.5200, -46.6500],
+    ],
+    truck: {
+      model: "Volkswagen Constellation 17.230",
+      year: 2022,
+      fleetNumber: "FR-029",
+      capacityKg: 7800,
+      fuel: "Diesel",
+      lastMaintenance: "2026-04-01",
+      nextMaintenance: "2026-06-01",
+      km: 45900,
+      photo: truckPhoto("BIN-4798"),
+    },
+    crew: [
+      { name: "Isabela Krause", role: "Motorista", age: 36, experience: "9 anos", shift: "05h - 13h", phone: "(11) 9 8112-9988", photo: avatar("Isabela Krause") },
+      { name: "Murilo Faria", role: "Coletor", age: 28, experience: "4 anos", shift: "05h - 13h", phone: "(11) 9 8556-1122", photo: avatar("Murilo Faria") },
+      { name: "Renato Quintana", role: "Auxiliar", age: 24, experience: "2 anos", shift: "05h - 13h", phone: "(11) 9 9001-7788", photo: avatar("Renato Quintana") },
     ],
   },
 ];

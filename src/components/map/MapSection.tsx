@@ -63,6 +63,7 @@ export default function MapSection() {
                 activeCategories={activeCategories}
                 showTrucks={showTrucks}
                 showRoutes={showRoutes}
+                showPoints={showPoints}
                 selectedPointId={selectedPoint?.id ?? null}
                 selectedTruckId={selectedTruckId}
                 onSelectPoint={setSelectedPoint}

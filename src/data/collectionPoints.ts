@@ -1,4 +1,4 @@
-export type WasteCategory = "reciclavel" | "organico" | "eletronico" | "vidro" | "misto";
+export type WasteCategory = "reciclavel" | "organico" | "eletronico" | "misto";
 
 export interface CollectionPoint {
   id: string;

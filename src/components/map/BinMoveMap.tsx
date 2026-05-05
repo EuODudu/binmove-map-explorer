@@ -63,15 +63,16 @@ export default function BinMoveMap({
       {showRoutes &&
         streetRoutes.map((r) => {
           const isSelected = selectedTruckId === r.id;
+          const color = CATEGORY_META[r.category].color;
           return (
             <Polyline
               key={r.id}
               positions={r.path}
               pathOptions={{
-                color: isSelected ? "#4ade80" : "#22c55e",
-                weight: isSelected ? 4 : 2.5,
-                opacity: isSelected ? 0.9 : 0.45,
-                dashArray: isSelected ? "8 6" : "4 8",
+                color,
+                weight: isSelected ? 5 : 3,
+                opacity: isSelected ? 0.95 : 0.6,
+                dashArray: isSelected ? "8 6" : undefined,
                 className: isSelected ? "binmove-route-active" : undefined,
               }}
             />

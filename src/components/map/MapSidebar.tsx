@@ -43,9 +43,20 @@ export default function MapSidebar({
 }: MapSidebarProps) {
   const cats = Object.keys(CATEGORY_META) as WasteCategory[];
   const visibleCount = COLLECTION_POINTS.filter((p) => activeCategories.has(p.category)).length;
+  const [suggestOpen, setSuggestOpen] = useState(false);
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+
+  useEffect(() => {
+    setSuggestions(loadSuggestions());
+  }, []);
 
   return (
     <aside className="flex h-full w-full flex-col gap-5 overflow-y-auto rounded-2xl border border-border bg-card/60 p-5 backdrop-blur-sm lg:w-[340px]">
+      <SuggestionDialog
+        open={suggestOpen}
+        onOpenChange={setSuggestOpen}
+        onCreated={() => setSuggestions(loadSuggestions())}
+      />
       <div>
         <h3 className="font-display text-sm font-semibold uppercase tracking-widest text-primary">
           Filtros

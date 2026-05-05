@@ -4,11 +4,12 @@ export interface TruckRoute {
   driver: string;
   category: "reciclavel" | "organico" | "misto";
   capacity: number; // 0-100
-  // path of [lat, lng] coords the truck cycles through
+  // Waypoints [lat, lng]. The actual driving path is resolved via OSRM
+  // at runtime so the polyline follows the real streets instead of
+  // cutting through buildings.
   path: [number, number][];
 }
 
-// Each route is a polyline through real SP streets (approximate, smoothed)
 export const TRUCK_ROUTES: TruckRoute[] = [
   {
     id: "t1",
@@ -18,14 +19,12 @@ export const TRUCK_ROUTES: TruckRoute[] = [
     capacity: 62,
     path: [
       [-23.5648, -46.6849], // Pinheiros
-      [-23.5601, -46.682],
       [-23.5546, -46.6912], // Vila Madalena
       [-23.5447, -46.6566], // Higienópolis
       [-23.5505, -46.6333], // Sé
-      [-23.5587, -46.6346], // Liberdade
       [-23.5651, -46.6481], // Bela Vista
       [-23.5634, -46.6716], // Jardins
-      [-23.5648, -46.6849], // back
+      [-23.5648, -46.6849],
     ],
   },
   {
@@ -52,7 +51,6 @@ export const TRUCK_ROUTES: TruckRoute[] = [
     path: [
       [-23.5036, -46.6242], // Santana
       [-23.5274, -46.7045], // Lapa
-      [-23.5267, -46.6877], // Pompeia
       [-23.5339, -46.6755], // Perdizes
       [-23.5447, -46.6566], // Higienópolis
       [-23.5575, -46.5959], // Mooca
@@ -70,8 +68,61 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5505, -46.6333], // Sé
       [-23.5575, -46.5959], // Mooca
       [-23.5408, -46.5764], // Tatuapé
-      [-23.5587, -46.6346],
       [-23.5505, -46.6333],
+    ],
+  },
+  {
+    id: "t5",
+    plate: "BIN-4521",
+    driver: "Marcos L.",
+    category: "organico",
+    capacity: 55,
+    path: [
+      [-23.6280, -46.6410], // Saúde
+      [-23.6431, -46.6291], // Jabaquara
+      [-23.6189, -46.6552], // Vila Mascote
+      [-23.6280, -46.6410],
+    ],
+  },
+  {
+    id: "t6",
+    plate: "BIN-5089",
+    driver: "Patrícia G.",
+    category: "misto",
+    capacity: 47,
+    path: [
+      [-23.5232, -46.6553], // Santa Cecília
+      [-23.5180, -46.6411], // Bom Retiro
+      [-23.5290, -46.6280], // Brás
+      [-23.5400, -46.6420], // Centro
+      [-23.5232, -46.6553],
+    ],
+  },
+  {
+    id: "t7",
+    plate: "BIN-6634",
+    driver: "Felipe T.",
+    category: "reciclavel",
+    capacity: 70,
+    path: [
+      [-23.5705, -46.7035], // Vila Leopoldina
+      [-23.5468, -46.7138], // Alto de Pinheiros
+      [-23.5627, -46.6932], // Pinheiros leste
+      [-23.5705, -46.7035],
+    ],
+  },
+  {
+    id: "t8",
+    plate: "BIN-7720",
+    driver: "Luana D.",
+    category: "organico",
+    capacity: 33,
+    path: [
+      [-23.5320, -46.7910], // Butantã
+      [-23.5610, -46.7320], // Caxingui
+      [-23.5800, -46.7050], // Morumbi
+      [-23.5650, -46.7600], // Rio Pequeno
+      [-23.5320, -46.7910],
     ],
   },
 ];

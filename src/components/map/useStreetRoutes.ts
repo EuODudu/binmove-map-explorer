@@ -17,8 +17,18 @@ async function fetchOsrmPath(
       | [number, number][]
       | undefined;
     if (!geom || geom.length < 2) return null;
-    // OSRM returns [lng, lat] — flip to [lat, lng]
-    return geom.map(([lng, lat]) => [lat, lng] as [number, number]);
+    // OSRM returns [lng, lat] — flip to [lat, lng] and drop invalid coords
+    const path = geom
+      .filter(
+        (c) =>
+          Array.isArray(c) &&
+          typeof c[0] === "number" &&
+          typeof c[1] === "number" &&
+          Number.isFinite(c[0]) &&
+          Number.isFinite(c[1]),
+      )
+      .map(([lng, lat]) => [lat, lng] as [number, number]);
+    return path.length >= 2 ? path : null;
   } catch {
     return null;
   }

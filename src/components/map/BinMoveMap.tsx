@@ -16,6 +16,7 @@ interface BinMoveMapProps {
   activeCategories: Set<WasteCategory>;
   showTrucks: boolean;
   showRoutes: boolean;
+  showPoints: boolean;
   selectedPointId: string | null;
   selectedTruckId: string | null;
   onSelectPoint: (p: CollectionPoint | null) => void;
@@ -28,6 +29,7 @@ export default function BinMoveMap({
   activeCategories,
   showTrucks,
   showRoutes,
+  showPoints,
   selectedPointId,
   selectedTruckId,
   onSelectPoint,
@@ -98,7 +100,7 @@ export default function BinMoveMap({
           );
         })}
 
-      {visiblePoints.map((p) => (
+      {showPoints && visiblePoints.map((p) => (
         <Marker
           key={p.id}
           position={p.position}

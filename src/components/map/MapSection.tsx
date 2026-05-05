@@ -14,6 +14,7 @@ export default function MapSection() {
   );
   const [showTrucks, setShowTrucks] = useState(true);
   const [showRoutes, setShowRoutes] = useState(true);
+  const [showPoints, setShowPoints] = useState(true);
   const [selectedPoint, setSelectedPoint] = useState<CollectionPoint | null>(null);
   const [selectedTruckId, setSelectedTruckId] = useState<string | null>(null);
 
@@ -62,6 +63,7 @@ export default function MapSection() {
                 activeCategories={activeCategories}
                 showTrucks={showTrucks}
                 showRoutes={showRoutes}
+                showPoints={showPoints}
                 selectedPointId={selectedPoint?.id ?? null}
                 selectedTruckId={selectedTruckId}
                 onSelectPoint={setSelectedPoint}
@@ -100,6 +102,8 @@ export default function MapSection() {
               setShowTrucks={setShowTrucks}
               showRoutes={showRoutes}
               setShowRoutes={setShowRoutes}
+              showPoints={showPoints}
+              setShowPoints={setShowPoints}
               selectedTruckId={selectedTruckId}
               onSelectTruck={setSelectedTruckId}
             />

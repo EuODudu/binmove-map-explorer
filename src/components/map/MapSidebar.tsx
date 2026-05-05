@@ -1,4 +1,4 @@
-import { Recycle, Leaf, Lightbulb, Trash2, Truck, Route, MapPin } from "lucide-react";
+import { Recycle, Leaf, Lightbulb, Trash2, Truck, Route, MapPin, MapPinned } from "lucide-react";
 import { CATEGORY_META, COLLECTION_POINTS, type WasteCategory } from "@/data/collectionPoints";
 import { TRUCK_ROUTES } from "@/data/truckRoutes";
 import { cn } from "@/lib/utils";
@@ -19,6 +19,8 @@ interface MapSidebarProps {
   setShowTrucks: (v: boolean) => void;
   showRoutes: boolean;
   setShowRoutes: (v: boolean) => void;
+  showPoints: boolean;
+  setShowPoints: (v: boolean) => void;
   selectedTruckId: string | null;
   onSelectTruck: (id: string | null) => void;
 }
@@ -30,6 +32,8 @@ export default function MapSidebar({
   setShowTrucks,
   showRoutes,
   setShowRoutes,
+  showPoints,
+  setShowPoints,
   selectedTruckId,
   onSelectTruck,
 }: MapSidebarProps) {
@@ -87,6 +91,12 @@ export default function MapSidebar({
           label="Rotas dos caminhões"
           active={showRoutes}
           onChange={setShowRoutes}
+        />
+        <ToggleRow
+          icon={<MapPinned className="h-4 w-4" />}
+          label="Pontos de coleta"
+          active={showPoints}
+          onChange={setShowPoints}
         />
       </div>
 

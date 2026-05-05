@@ -16,6 +16,7 @@ interface BinMoveMapProps {
   activeCategories: Set<WasteCategory>;
   showTrucks: boolean;
   showRoutes: boolean;
+  showPoints: boolean;
   selectedPointId: string | null;
   selectedTruckId: string | null;
   onSelectPoint: (p: CollectionPoint | null) => void;

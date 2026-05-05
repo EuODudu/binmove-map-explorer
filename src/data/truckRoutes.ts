@@ -2,7 +2,7 @@ import type { WasteCategory } from "@/data/collectionPoints";
 
 export interface CrewMember {
   name: string;
-  role: "Motorista" | "Coletor" | "Auxiliar" | "Supervisor";
+  role: "Motorista" | "Coletor" | "Auxiliar" | "Líder de Equipe";
   age: number;
   experience: string; // e.g. "5 anos"
   shift: string; // e.g. "06h - 14h"
@@ -59,6 +59,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5650, -46.7000],
       [-23.5590, -46.6920],
       [-23.5620, -46.6810],
+      { name: "Anderson Pires", role: "Coletor", age: 31, experience: "5 anos", shift: "06h - 14h", phone: "(11) 9 8001-1010", photo: avatar("Anderson Pires") },
     ],
     truck: {
       model: "Mercedes-Benz Atego 1719",
@@ -93,6 +94,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5470, -46.6985],
       [-23.5455, -46.6900],
       [-23.5510, -46.6870],
+      { name: "Gabriel Nunes", role: "Coletor", age: 26, experience: "3 anos", shift: "05h - 13h", phone: "(11) 9 8002-2020", photo: avatar("Gabriel Nunes") },
     ],
     truck: {
       model: "Volkswagen Constellation 17.230",
@@ -127,6 +129,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5380, -46.6640],
       [-23.5360, -46.6560],
       [-23.5410, -46.6520],
+      { name: "Paulo Henrique", role: "Coletor", age: 33, experience: "7 anos", shift: "07h - 15h", phone: "(11) 9 8003-3030", photo: avatar("Paulo Henrique") },
     ],
     truck: {
       model: "Iveco Tector 11-190 Elétrico",
@@ -142,7 +145,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
     crew: [
       { name: "Rafael Silva", role: "Motorista", age: 45, experience: "15 anos", shift: "07h - 15h", phone: "(11) 9 8445-9900", photo: avatar("Rafael Silva") },
       { name: "Felipe Castro", role: "Coletor", age: 28, experience: "4 anos", shift: "07h - 15h", phone: "(11) 9 8112-3344", photo: avatar("Felipe Castro") },
-      { name: "Diego Nogueira", role: "Supervisor", age: 39, experience: "11 anos", shift: "07h - 15h", phone: "(11) 9 9988-7766", photo: avatar("Diego Nogueira") },
+      { name: "Diego Nogueira", role: "Líder de Equipe", age: 39, experience: "11 anos", shift: "07h - 15h", phone: "(11) 9 9988-7766", photo: avatar("Diego Nogueira") },
     ],
   },
   {
@@ -161,6 +164,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5690, -46.6600],
       [-23.5620, -46.6530],
       [-23.5630, -46.6430],
+      { name: "Thiago Moreira", role: "Coletor", age: 29, experience: "4 anos", shift: "06h - 14h", phone: "(11) 9 8004-4040", photo: avatar("Thiago Moreira") },
     ],
     truck: {
       model: "Ford Cargo 1719",
@@ -195,6 +199,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.6060, -46.6790],
       [-23.6000, -46.6710],
       [-23.6030, -46.6620],
+      { name: "Eduardo Pacheco", role: "Coletor", age: 30, experience: "5 anos", shift: "05h - 13h", phone: "(11) 9 8005-5050", photo: avatar("Eduardo Pacheco") },
     ],
     truck: {
       model: "Scania P 280 GNV",
@@ -229,6 +234,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5920, -46.6470],
       [-23.5860, -46.6400],
       [-23.5860, -46.6310],
+      { name: "Fábio Rezende", role: "Coletor", age: 34, experience: "8 anos", shift: "08h - 16h", phone: "(11) 9 8006-6060", photo: avatar("Fábio Rezende") },
     ],
     truck: {
       model: "Mercedes-Benz Accelo 1316 Híbrido",
@@ -244,7 +250,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
     crew: [
       { name: "Patrícia Gomes", role: "Motorista", age: 33, experience: "7 anos", shift: "08h - 16h", phone: "(11) 9 8778-2211", photo: avatar("Patrícia Gomes") },
       { name: "Sandro Vieira", role: "Coletor", age: 30, experience: "5 anos", shift: "08h - 16h", phone: "(11) 9 8445-6677", photo: avatar("Sandro Vieira") },
-      { name: "Roberta Lima", role: "Supervisor", age: 37, experience: "10 anos", shift: "08h - 16h", phone: "(11) 9 9112-8899", photo: avatar("Roberta Lima") },
+      { name: "Roberta Lima", role: "Líder de Equipe", age: 37, experience: "10 anos", shift: "08h - 16h", phone: "(11) 9 9112-8899", photo: avatar("Roberta Lima") },
     ],
   },
   {
@@ -263,6 +269,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5840, -46.6880],
       [-23.5780, -46.6810],
       [-23.5780, -46.6720],
+      { name: "Vitor Camargo", role: "Coletor", age: 28, experience: "4 anos", shift: "06h - 14h", phone: "(11) 9 8007-7070", photo: avatar("Vitor Camargo") },
     ],
     truck: {
       model: "Volvo VM 270",
@@ -297,6 +304,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5370, -46.6870],
       [-23.5310, -46.6790],
       [-23.5310, -46.6700],
+      { name: "Samuel Rocha", role: "Coletor", age: 27, experience: "3 anos", shift: "05h - 13h", phone: "(11) 9 8008-8080", photo: avatar("Samuel Rocha") },
     ],
     truck: {
       model: "Iveco Daily 70C17",
@@ -331,6 +339,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5440, -46.5870],
       [-23.5380, -46.5800],
       [-23.5380, -46.5710],
+      { name: "Otavio Brandão", role: "Coletor", age: 32, experience: "6 anos", shift: "06h - 14h", phone: "(11) 9 8009-9090", photo: avatar("Otavio Brandão") },
     ],
     truck: {
       model: "Ford Cargo 2429",
@@ -365,6 +374,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5610, -46.6060],
       [-23.5550, -46.5990],
       [-23.5550, -46.5900],
+      { name: "Kleber Antunes", role: "Coletor", age: 35, experience: "9 anos", shift: "07h - 15h", phone: "(11) 9 8010-1212", photo: avatar("Kleber Antunes") },
     ],
     truck: {
       model: "Mercedes-Benz Atego 1419",
@@ -399,6 +409,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5070, -46.6350],
       [-23.5010, -46.6280],
       [-23.5010, -46.6190],
+      { name: "Tadeu Marinho", role: "Coletor", age: 29, experience: "4 anos", shift: "05h - 13h", phone: "(11) 9 8011-2323", photo: avatar("Tadeu Marinho") },
     ],
     truck: {
       model: "Volkswagen Delivery 11.180",
@@ -433,6 +444,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5300, -46.7150],
       [-23.5240, -46.7080],
       [-23.5240, -46.6990],
+      { name: "Adriano Souto", role: "Coletor", age: 31, experience: "6 anos", shift: "06h - 14h", phone: "(11) 9 8012-3434", photo: avatar("Adriano Souto") },
     ],
     truck: {
       model: "Scania P 250",
@@ -467,6 +479,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.6310, -46.6520],
       [-23.6250, -46.6450],
       [-23.6250, -46.6360],
+      { name: "Wagner Coelho", role: "Coletor", age: 33, experience: "7 anos", shift: "06h - 14h", phone: "(11) 9 8013-4545", photo: avatar("Wagner Coelho") },
     ],
     truck: {
       model: "Mercedes-Benz Atego 1719",
@@ -501,6 +514,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
       [-23.5260, -46.6660],
       [-23.5200, -46.6590],
       [-23.5200, -46.6500],
+      { name: "Bernardo Vilas", role: "Coletor", age: 26, experience: "3 anos", shift: "05h - 13h", phone: "(11) 9 8014-5656", photo: avatar("Bernardo Vilas") },
     ],
     truck: {
       model: "Volkswagen Constellation 17.230",

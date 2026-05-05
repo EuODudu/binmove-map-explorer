@@ -9,7 +9,7 @@ async function fetchOsrmPath(
 ): Promise<[number, number][] | null> {
   try {
     const coords = waypoints.map(([lat, lng]) => `${lng},${lat}`).join(";");
-    const url = `https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`;
+    const url = `https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson&exclude=motorway&continue_straight=true`;
     const res = await fetch(url);
     if (!res.ok) return null;
     const data = await res.json();

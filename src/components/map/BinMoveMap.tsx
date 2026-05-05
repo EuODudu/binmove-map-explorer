@@ -63,19 +63,38 @@ export default function BinMoveMap({
       {showRoutes &&
         streetRoutes.map((r) => {
           const isSelected = selectedTruckId === r.id;
-          const color = CATEGORY_META[r.category].color;
+          const meta = CATEGORY_META[r.category];
+          const color = meta.color;
+          // Pick evenly-spaced points along the path to display category symbols
+          const symbolPositions: [number, number][] = [];
+          if (r.path.length > 0) {
+            const count = Math.min(5, Math.max(2, Math.floor(r.path.length / 6)));
+            const step = Math.floor(r.path.length / (count + 1));
+            for (let i = 1; i <= count; i++) {
+              symbolPositions.push(r.path[i * step]);
+            }
+          }
           return (
-            <Polyline
-              key={r.id}
-              positions={r.path}
-              pathOptions={{
-                color,
-                weight: isSelected ? 5 : 3,
-                opacity: isSelected ? 0.95 : 0.6,
-                dashArray: isSelected ? "8 6" : undefined,
-                className: isSelected ? "binmove-route-active" : undefined,
-              }}
-            />
+            <div key={r.id}>
+              <Polyline
+                positions={r.path}
+                pathOptions={{
+                  color,
+                  weight: isSelected ? 5 : 3,
+                  opacity: isSelected ? 0.95 : 0.6,
+                  dashArray: isSelected ? "8 6" : undefined,
+                  className: isSelected ? "binmove-route-active" : undefined,
+                }}
+              />
+              {symbolPositions.map((pos, idx) => (
+                <Marker
+                  key={`${r.id}-sym-${idx}`}
+                  position={pos}
+                  icon={createCategoryBadgeIcon(r.category)}
+                  interactive={false}
+                />
+              ))}
+            </div>
           );
         })}
 

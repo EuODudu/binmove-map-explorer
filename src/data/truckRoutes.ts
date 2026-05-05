@@ -1,12 +1,11 @@
+import type { WasteCategory } from "@/data/collectionPoints";
+
 export interface TruckRoute {
   id: string;
   plate: string;
   driver: string;
-  category: "reciclavel" | "organico" | "misto";
+  category: WasteCategory;
   capacity: number; // 0-100
-  // Waypoints [lat, lng]. Resolved to street-following polylines via OSRM
-  // at runtime. Each route is a medium-sized loop covering several blocks
-  // within a neighborhood — compact but not tiny.
   path: [number, number][];
 }
 

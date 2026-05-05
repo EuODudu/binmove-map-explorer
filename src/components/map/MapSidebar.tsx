@@ -19,6 +19,8 @@ interface MapSidebarProps {
   setShowTrucks: (v: boolean) => void;
   showRoutes: boolean;
   setShowRoutes: (v: boolean) => void;
+  showPoints: boolean;
+  setShowPoints: (v: boolean) => void;
   selectedTruckId: string | null;
   onSelectTruck: (id: string | null) => void;
 }

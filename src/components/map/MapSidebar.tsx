@@ -32,6 +32,8 @@ export default function MapSidebar({
   setShowTrucks,
   showRoutes,
   setShowRoutes,
+  showPoints,
+  setShowPoints,
   selectedTruckId,
   onSelectTruck,
 }: MapSidebarProps) {

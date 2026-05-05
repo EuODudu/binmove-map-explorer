@@ -47,7 +47,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
     id: "t3",
     plate: "BIN-0975",
     driver: "Rafael S.",
-    category: "misto",
+    category: "eletronico",
     capacity: 81,
     path: [
       [-23.5410, -46.6520],
@@ -95,7 +95,7 @@ export const TRUCK_ROUTES: TruckRoute[] = [
     id: "t6",
     plate: "BIN-5089",
     driver: "Patrícia G.",
-    category: "misto",
+    category: "eletronico",
     capacity: 47,
     path: [
       [-23.5860, -46.6310],

@@ -102,6 +102,8 @@ export default function MapSection() {
               setShowTrucks={setShowTrucks}
               showRoutes={showRoutes}
               setShowRoutes={setShowRoutes}
+              showPoints={showPoints}
+              setShowPoints={setShowPoints}
               selectedTruckId={selectedTruckId}
               onSelectTruck={setSelectedTruckId}
             />

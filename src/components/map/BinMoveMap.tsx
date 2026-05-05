@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import {
   COLLECTION_POINTS,
   CATEGORY_META,

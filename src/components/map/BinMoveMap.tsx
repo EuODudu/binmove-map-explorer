@@ -157,36 +157,7 @@ export default function BinMoveMap({
             eventHandlers={{
               click: () => onSelectTruck(t.route.id),
             }}
-          >
-            <Popup>
-              <div className="min-w-[200px] space-y-1.5">
-                <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                  Caminhão em rota
-                </span>
-                <h4 className="text-base font-semibold text-foreground">
-                  {t.route.plate}
-                </h4>
-                <p className="text-xs text-muted-foreground">
-                  Motorista: {t.route.driver}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  Tipo: {CATEGORY_META[t.route.category].label}
-                </p>
-                <div className="pt-1">
-                  <div className="flex items-center justify-between text-[10px] text-muted-foreground mb-1">
-                    <span>Capacidade</span>
-                    <span>{t.route.capacity}%</span>
-                  </div>
-                  <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
-                    <div
-                      className="h-full bg-primary"
-                      style={{ width: `${t.route.capacity}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </Popup>
-          </Marker>
+          />
         ))}
     </MapContainer>
   );
